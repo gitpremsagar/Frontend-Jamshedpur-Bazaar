@@ -6,16 +6,11 @@ export default function NavBar() {
     // NavBar container
     <div className="flex justify-between bg-blue-500 items-center p-4 text-white font-bold">
       {/*Brandname*/}
-      <div>
-        <Link href={`/`}>Jamshedpur Bazaar</Link>
-      </div>
+      <div className="flex items-center">
+        <div className="mr-10 hover:text-black">
+          <Link href={`/`}>Jamshedpur Bazaar</Link>
+        </div>
 
-      <div>
-      
-      </div>
-
-      {/*Navigation menu*/}
-      <div>
         <nav>
           <ul className="flex">
             <li className="nav_li">
@@ -29,6 +24,26 @@ export default function NavBar() {
             </li>
           </ul>
         </nav>
+      </div>
+
+      <div className="min-w-[400px] ">
+        <form className="flex">
+          <input
+            name="searchTerm"
+            type="search"
+            placeholder="search for product"
+            className="font-normal px-2 py-1 rounded focus:outline-none border-2 text-black w-full"
+          />
+          <button className="bg-blue-600 rounded px-2 hover:bg-blue-700">
+            Search
+          </button>
+        </form>
+      </div>
+
+      {/*Navigation menu*/}
+      <div>
+      <button className="mr-4">Login</button>
+      <button>Sign Up</button>
       </div>
     </div>
   );

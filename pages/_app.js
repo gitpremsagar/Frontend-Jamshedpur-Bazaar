@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }) {
     <Fragment>
       <NavBar />
       <Component {...pageProps} />
-      <Footer />
+       
     </Fragment>
   );
 }
