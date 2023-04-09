@@ -1,32 +1,25 @@
 import Link from "next/link";
 import React from "react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import SearchIcon from "@mui/icons-material/Search";
+import NavMenu from "./NavMenu";
 
 export default function NavBar() {
   return (
     // NavBar container
-    <div className="flex justify-between bg-blue-500 items-center p-4 text-white font-bold">
+    <div className="sm:flex justify-between bg-blue-500 items-center p-4 text-white font-bold hidden">
       {/*Brandname*/}
       <div className="flex items-center">
         <div className="mr-10 hover:text-black">
           <Link href={`/`}>Jamshedpur Bazaar</Link>
         </div>
 
-        <nav>
-          <ul className="flex">
-            <li className="nav_li">
-              <Link href={`/`}>Grocery</Link>
-            </li>
-            <li className="nav_li">
-              <Link href={`/`}>Vegetables</Link>
-            </li>
-            <li className="nav_li">
-              <Link href={`/`}>Non-Veg</Link>
-            </li>
-          </ul>
-        </nav>
+        <NavMenu />
       </div>
 
-      <div className="min-w-[400px] ">
+      {/* Search Bar */}
+      <div className=" lg:max-w-[700px] lg:min-w-[500px] w-full">
         <form className="flex">
           <input
             name="searchTerm"
@@ -42,8 +35,14 @@ export default function NavBar() {
 
       {/*Navigation menu*/}
       <div>
-      <button className="mr-4">Login</button>
-      <button>Sign Up</button>
+        <button className="mr-4">
+          <FavoriteIcon />
+        </button>
+        <button className="mr-4">
+          <ShoppingCartIcon />
+        </button>
+        <button className="mr-4">Login</button>
+        <button>Sign Up</button>
       </div>
     </div>
   );

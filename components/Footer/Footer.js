@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faTwitter, faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
@@ -10,48 +10,48 @@ const Footer = () => {
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
           <div className="px-5 py-2">
             <Link href="/">
-              <a className="text-base leading-6 text-gray-300 hover:text-white">
+              <span className="text-base leading-6 text-gray-300 hover:text-white">
                 Home
-              </a>
+              </span>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/about">
-              <a className="text-base leading-6 text-gray-300 hover:text-white">
+              <span className="text-base leading-6 text-gray-300 hover:text-white">
                 About Us
-              </a>
+              </span>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/blog">
-              <a className="text-base leading-6 text-gray-300 hover:text-white">
+              <span className="text-base leading-6 text-gray-300 hover:text-white">
                 Blog
-              </a>
+              </span>
             </Link>
           </div>
           <div className="px-5 py-2">
             <Link href="/contact">
-              <a className="text-base leading-6 text-gray-300 hover:text-white">
+              <span className="text-base leading-6 text-gray-300 hover:text-white">
                 Contact Us
-              </a>
+              </span>
             </Link>
           </div>
         </nav>
-        <div className="mt-8 flex justify-center space-x-6">
-          <a href="#" className="text-gray-400 hover:text-gray-300">
+        {/* <div className="mt-8 flex justify-center space-x-6">
+          <span href="#" className="text-gray-400 hover:text-gray-300">
             <span className="sr-only">Twitter</span>
             <FontAwesomeIcon icon={faTwitter} className="h-6 w-6" />
-          </a>
-          <a href="#" className="text-gray-400 hover:text-gray-300">
+          </span>
+          <span href="#" className="text-gray-400 hover:text-gray-300">
             <span className="sr-only">Facebook</span>
             <FontAwesomeIcon icon={faFacebook} className="h-6 w-6" />
-          </a>
-          <a href="#" className="text-gray-400 hover:text-gray-300">
+          </span>
+          <span href="#" className="text-gray-400 hover:text-gray-300">
             <span className="sr-only">Instagram</span>
             <FontAwesomeIcon icon={faInstagram} className="h-6 w-6" />
-          </a>
-        </div>
-        
+          </span>
+        </div> */}
+
         <p className="mt-8 text-center text-base leading-6 text-gray-400">
           &copy; 2023 My Website. All rights reserved.
         </p>
