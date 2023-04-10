@@ -197,12 +197,12 @@ export default function NavMenu() {
   return (
     <div>
       <nav className="text-white bg-blue-600">
-        <ul className="main_menu">
+        <ul className="main_menu ">
           {categories.map((category, key) => {
             return (
               <li
                 key={key}
-                className="mr-2 inline-block px-3 py-2 hover:bg-blue-800"
+                className="mr-2 inline-block px-3 py-2 hover:bg-blue-800 cursor-pointer"
               >
                 {category.name}
                 <ul className="sub_menu">

@@ -39,8 +39,12 @@ export default function NavBar() {
         <button className="mr-4">
           <ShoppingCartIcon />
         </button>
-        <button className="mr-4">Login</button>
-        <button>Sign Up</button>
+        <Link href={`/login`}>
+          <button className="mr-4">Login</button>
+        </Link>
+        <Link href={`/signup`}>
+          <button>Sign Up</button>
+        </Link>
       </div>
     </div>
   );
