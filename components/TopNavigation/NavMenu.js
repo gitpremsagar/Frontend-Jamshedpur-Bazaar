@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 
 export default function NavMenu() {
@@ -204,18 +205,32 @@ export default function NavMenu() {
                 key={key}
                 className="mr-2 inline-block px-3 py-2 hover:bg-blue-800 cursor-pointer"
               >
-                {category.name}
+                <Link href={`/products/${category.name}`} className="block">
+                  {category.name}
+                </Link>
+
                 <ul className="sub_menu">
                   {category.subcategories.map((subcategory_leve_1, key) => {
                     return (
                       <li className="px-3 py-2 bg-gray-600" key={key}>
-                        {subcategory_leve_1.name}
+                        <Link
+                          href={`/products/${category.name}/${subcategory_leve_1.name}`}
+                          className="block"
+                        >
+                          {subcategory_leve_1.name}
+                        </Link>
+
                         <ul className="bg-blue-600 super_submenu">
                           {subcategory_leve_1.subcategories.map(
                             (subcategory_leve_2, key) => {
                               return (
                                 <li className="px-3 py-2" key={key}>
-                                  {subcategory_leve_2.name}
+                                  <Link
+                                    href={`/products/${category.name}/${subcategory_leve_1.name}/${subcategory_leve_2.name}`}
+                                    className="block"
+                                  >
+                                    {subcategory_leve_2.name}
+                                  </Link>
                                 </li>
                               );
                             }
