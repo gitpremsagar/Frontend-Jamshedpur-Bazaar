@@ -1,4 +1,3 @@
-import TestMenu from "@/components/TopNavigation/NavMenu";
 import ProductCard from "@/components/cards/ProductCard";
 
 export default function Home() {

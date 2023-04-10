@@ -42,7 +42,7 @@ export default function NavMenu() {
       ],
     },
     {
-      name: "Grocery",
+      name: "Meat & Seafood",
       subcategories: [
         {
           name: "Beverages",
@@ -81,7 +81,61 @@ export default function NavMenu() {
       ],
     },
     {
-      name: "Grocery",
+      name: "Canned & Packaged Foods",
+      subcategories: [
+        {
+          name: "Beverages",
+          subcategories: [
+            {
+              name: "Coffee & Tea",
+              subcategories: [
+                { name: "Ground Coffee" },
+                { name: "Instant Coffee" },
+                { name: "Tea" },
+              ],
+            },
+            {
+              name: "Juices & Soft Drinks",
+              subcategories: [{ name: "Juices" }, { name: "Soft Drinks" }],
+            },
+          ],
+        },
+        {
+          name: "Snacks",
+          subcategories: [
+            { name: "Chips & Pretzels" },
+            { name: "Cookies & Crackers" },
+            { name: "Nuts & Seeds" },
+            { name: "Popcorn" },
+            { name: "Granola Bars" },
+            { name: "Trail Mix" },
+            { name: "Puffed Snacks" },
+            { name: "Jerky & Meat Snacks" },
+            { name: "Cheese Snacks" },
+            { name: "Dips & Spreads" },
+            { name: "Rice Cakes & Chips" },
+          ],
+        },
+        {
+          name: "Canned & Packaged Foods",
+          subcategories: [
+            { name: "Canned Vegetables" },
+            { name: "Canned Fruits" },
+            { name: "Canned Meat & Seafood" },
+            { name: "Pasta & Noodles" },
+            { name: "Canned Soup & Chili" },
+            { name: "Boxed Meals & Side Dishes" },
+            { name: "Cereal & Breakfast Foods" },
+            { name: "Dried Beans & Grains" },
+            { name: "Dried Fruits & Vegetables" },
+            { name: "Flour & Meal" },
+          ],
+        },
+        // add more subcategories as needed
+      ],
+    },
+    {
+      name: "Vegetables & Fruits",
       subcategories: [
         {
           name: "Beverages",
@@ -142,22 +196,25 @@ export default function NavMenu() {
 
   return (
     <div>
-      <nav>
+      <nav className="text-white bg-blue-600">
         <ul className="main_menu">
-          {categories.map((category) => {
+          {categories.map((category, key) => {
             return (
-              <li className="mr-2 inline-block px-3 py-2">
+              <li
+                key={key}
+                className="mr-2 inline-block px-3 py-2 hover:bg-blue-800"
+              >
                 {category.name}
                 <ul className="sub_menu">
-                  {category.subcategories.map((subcategory_leve_1) => {
+                  {category.subcategories.map((subcategory_leve_1, key) => {
                     return (
-                      <li className="px-3 py-2 bg-gray-600">
+                      <li className="px-3 py-2 bg-gray-600" key={key}>
                         {subcategory_leve_1.name}
                         <ul className="bg-blue-600 super_submenu">
                           {subcategory_leve_1.subcategories.map(
-                            (subcategory_leve_2) => {
+                            (subcategory_leve_2, key) => {
                               return (
-                                <li className="px-3 py-2">
+                                <li className="px-3 py-2" key={key}>
                                   {subcategory_leve_2.name}
                                 </li>
                               );

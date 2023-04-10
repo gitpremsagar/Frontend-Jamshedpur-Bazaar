@@ -14,8 +14,6 @@ export default function NavBar() {
         <div className="mr-10 hover:text-black">
           <Link href={`/`}>Jamshedpur Bazaar</Link>
         </div>
-
-        <NavMenu />
       </div>
 
       {/* Search Bar */}

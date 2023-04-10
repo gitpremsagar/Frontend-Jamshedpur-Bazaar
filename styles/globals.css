@@ -16,8 +16,11 @@
   @apply absolute hidden;
 }
 
+.sub_menu{
+  @apply translate-y-2 -translate-x-3
+}
 .super_submenu{
- @apply translate-x-20 -translate-y-8;
+ @apply translate-x-48 -translate-y-8;
 }
 
 .super_submenu li, .sub_menu li{
