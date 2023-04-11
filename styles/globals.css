@@ -28,7 +28,7 @@
  }
 
  .home_page_section{
-  @apply min-h-[300px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5;
+  @apply min-h-[300px] grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5;
  }
 
 
