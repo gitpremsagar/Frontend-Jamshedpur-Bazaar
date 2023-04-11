@@ -2,8 +2,6 @@ import Link from "next/link";
 import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import SearchIcon from "@mui/icons-material/Search";
-import NavMenu from "./NavMenu";
 
 export default function NavBar() {
   return (
@@ -37,7 +35,9 @@ export default function NavBar() {
           <FavoriteIcon />
         </button>
         <button className="mr-4">
-          <ShoppingCartIcon />
+          <Link href={`/cart`}>
+            <ShoppingCartIcon />
+          </Link>
         </button>
         <Link href={`/login`}>
           <button className="mr-4">Login</button>
