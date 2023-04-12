@@ -1,10 +1,22 @@
 import { BACKEND_API_FOR_ADMIN } from "@/service/envVars";
 import axios from "axios";
 import React, { useRef } from "react";
+import Cookies from "js-cookie";
 
 export default function AdminLoginPage() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  // const setJWTCookie = (jwt) => {
+  //   // Set cookie valid for 1 day
+  //   const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day in milliseconds
+  //   Cookies.set("token", jwt, { expires, path: "/" });
+  // };
+
+  const setJWTCookie = (jwt) => {
+    Cookies.set("token", jwt, { path: "/", session: true });
+  };
+
   async function handleAdminLoginFormSubmission(e) {
     e.preventDefault();
     try {
@@ -13,7 +25,14 @@ export default function AdminLoginPage() {
         password: passwordInputRef.current.value,
       });
 
-      console.log("Response = ", response.data);
+      // console.log("Response = ", response.data);
+      // console.log(
+      //   "Token sent from server = ",
+      //   response.headers["x-auth-token"]
+      // );
+      setJWTCookie(response.headers["x-auth-token"]);
+      //console.log(Cookies.get("token"));
+      window.location.replace("/admin/dashboard");
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +78,10 @@ export default function AdminLoginPage() {
           </div>
 
           <div>
-            <button className="" type="submit">
+            <button
+              className=" bg-blue-500 hover:bg-blue-600 rounded-lg px-3 py-2 text-white font-semibold"
+              type="submit"
+            >
               Login
             </button>
           </div>
