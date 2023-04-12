@@ -36,7 +36,16 @@ const Footer = () => {
               </span>
             </Link>
           </div>
+
+          <div className="px-5 py-2">
+            <Link href="/admin/login">
+              <span className="text-base leading-6 text-gray-300 hover:text-white">
+                Admin
+              </span>
+            </Link>
+          </div>
         </nav>
+        {/* Social Media Handles */}
         {/* <div className="mt-8 flex justify-center space-x-6">
           <span href="#" className="text-gray-400 hover:text-gray-300">
             <span className="sr-only">Twitter</span>

@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function RupeeSymbol() {
-  return (
-    <span class="rupee">&#8377;</span>
-  )
+  return <span className="rupee">&#8377;</span>;
 }

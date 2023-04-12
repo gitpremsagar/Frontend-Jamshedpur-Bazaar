@@ -61,12 +61,7 @@ const ProductDetailPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-2xl mx-auto lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden">
-            <img
-              src={product.image}
-              alt={product.title}
-              layout="fill"
-              objectFit="cover"
-            />
+            <img src={product.image} alt={product.title} layout="fill" />
           </div>
           <div className="mt-8 lg:mt-0">
             <div className="flex justify-between items-center">
@@ -76,12 +71,17 @@ const ProductDetailPage = () => {
               {/* <Rating rating={product.rating} />*/}
             </div>
             <h2 className="mt-3 text-xl font-medium text-gray-900">
-              <RupeeSymbol/>{product.price}
+              <RupeeSymbol />
+              {product.price}
             </h2>
             <p className="mt-4 text-gray-600">{product.description}</p>
             <div className="mt-6 ">
-              <button className="bg-blue-500 text-white text-sm px-3 py-2 rounded-lg hover:bg-blue-700">Add to Cart</button>
-              <button className="bg-yellow-400 text-black text-sm px-3 py-2 rounded-lg hover:bg-yellow-500 ml-5">Buy Now</button>
+              <button className="bg-blue-500 text-white text-sm px-3 py-2 rounded-lg hover:bg-blue-700">
+                Add to Cart
+              </button>
+              <button className="bg-yellow-400 text-black text-sm px-3 py-2 rounded-lg hover:bg-yellow-500 ml-5">
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
