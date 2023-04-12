@@ -11,6 +11,10 @@
   @apply block;
 }
 
+/* .asideLeft_li{
+  @apply text-white bg-gray-700 px-3 py-5 hover:underline hover:bg-gray-600 flex justify-between;
+} */
+
 
 .sub_menu, .super_submenu{
   @apply absolute hidden;
