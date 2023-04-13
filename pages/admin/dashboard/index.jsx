@@ -13,7 +13,7 @@ export default function AdminHomePage() {
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-8">
-        <div className="col-span-3 min-h-screen bg-gray-700">
+        <div className="col-span-2 p-5 min-h-screen bg-gray-700">
           <AsideLeft />
         </div>
       </div>
