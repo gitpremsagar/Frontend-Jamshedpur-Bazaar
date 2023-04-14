@@ -2,7 +2,10 @@ import React from "react";
 import PrimaryButton from "@/components/UI/PrimaryButton";
 import TableRow from "./TableRow";
 
-export default function TableSuperCategoryList() {
+export default function TableSuperCategoryList({
+  topCategories,
+  isLoadingTopCategories,
+}) {
   return (
     <div>
       <div className="flex flex-col border-2 my-10 rounded-lg">
@@ -27,14 +30,16 @@ export default function TableSuperCategoryList() {
                   </tr>
                 </thead>
                 <tbody>
-                  <TableRow />
-                  <TableRow />
-                  <TableRow />
-                  <TableRow />
-                  <TableRow />
-                  <TableRow />
-                  <TableRow />
-                  <TableRow />
+                  {!isLoadingTopCategories &&
+                    topCategories.map((topCategory, key) => {
+                      return (
+                        <TableRow
+                          key={key}
+                          index={key}
+                          topCategoryName={topCategory.top_category_name}
+                        />
+                      );
+                    })}
                 </tbody>
               </table>
               <PrimaryButton className={`float-right`}>

@@ -5,6 +5,9 @@ import H3 from "@/components/UI/H3";
 import TableSuperCategoryList from "@/components/admin/dashboard/product-management/TableSuperCategoryList";
 import TableSubCategoryList from "@/components/admin/dashboard/product-management/TableSubCategoryList";
 import TableCategoryList from "@/components/admin/dashboard/product-management/TableCategoryList";
+import useSWR from "swr";
+import { BACKEND_API_FOR_TOP_CATEGORIES } from "@/service/envVars";
+import axios from "axios";
 
 export default function AdminHomePage() {
   const [token, settoken] = useState();
@@ -13,6 +16,13 @@ export default function AdminHomePage() {
     const jwtToken = Cookies.get("token");
     settoken(jwtToken);
   }, []);
+
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const {
+    data: topCategories,
+    error,
+    isLoading: isLoadingTopCategories,
+  } = useSWR(BACKEND_API_FOR_TOP_CATEGORIES, fetcher);
 
   return (
     <div className="min-h-screen">
@@ -24,7 +34,10 @@ export default function AdminHomePage() {
           <main className="p-10">
             <section>
               <H3>Top Category Details :</H3>
-              <TableSuperCategoryList />
+              <TableSuperCategoryList
+                topCategories={topCategories}
+                isLoadingTopCategories={isLoadingTopCategories}
+              />
             </section>
 
             <section>
