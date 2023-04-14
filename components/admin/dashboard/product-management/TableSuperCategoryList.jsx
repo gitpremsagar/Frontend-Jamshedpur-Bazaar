@@ -2,13 +2,11 @@ import React from "react";
 import PrimaryButton from "@/components/UI/PrimaryButton";
 import TableRow from "./TableRow";
 
-export default function TableSuperCategoryList({
-  topCategories,
-  isLoadingTopCategories,
-}) {
+export default function TableSuperCategoryList({ topCategories }) {
+  let colorChanger = false;
   return (
     <div>
-      <div className="flex flex-col border-2 my-10 rounded-lg">
+      <div className="flex flex-col border-2 my-10">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div className="">
@@ -30,16 +28,17 @@ export default function TableSuperCategoryList({
                   </tr>
                 </thead>
                 <tbody>
-                  {!isLoadingTopCategories &&
-                    topCategories.map((topCategory, key) => {
-                      return (
-                        <TableRow
-                          key={key}
-                          index={key}
-                          topCategoryName={topCategory.top_category_name}
-                        />
-                      );
-                    })}
+                  {topCategories.map((topCategory, key) => {
+                    colorChanger = !colorChanger;
+                    return (
+                      <TableRow
+                        key={key}
+                        index={key}
+                        catName={topCategory.top_category_name}
+                        colorChanger={colorChanger}
+                      />
+                    );
+                  })}
                 </tbody>
               </table>
               <PrimaryButton className={`float-right`}>

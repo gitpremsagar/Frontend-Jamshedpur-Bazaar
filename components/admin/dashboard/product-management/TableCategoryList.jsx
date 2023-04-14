@@ -1,6 +1,9 @@
 import React from "react";
+import TableRow from "./TableRow";
+import PrimaryButton from "@/components/UI/PrimaryButton";
 
-export default function TableCategoryList() {
+export default function TableCategoryList({ categories }) {
+  let colorChanger = false;
   return (
     <div>
       <div className="flex flex-col border-2 my-10">
@@ -17,7 +20,7 @@ export default function TableCategoryList() {
                       Category
                     </th>
                     <th scope="col" className="px-6 py-4">
-                      Parent Super Category
+                      Parent Top Category
                     </th>
                     <th scope="col" className="px-6 py-4">
                       Edit
@@ -25,16 +28,23 @@ export default function TableCategoryList() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b bg-neutral-100 ">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">
-                      1
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">Mark</td>
-                    <td className="whitespace-nowrap px-6 py-4">Otto</td>
-                    <td className="whitespace-nowrap px-6 py-4">@mdo</td>
-                  </tr>
+                  {categories.map((category, key) => {
+                    colorChanger = !colorChanger;
+                    return (
+                      <TableRow
+                        catName={category.category_name}
+                        key={key}
+                        index={key}
+                        parentCatName={category.parent_top_category_name}
+                        colorChanger={colorChanger}
+                      />
+                    );
+                  })}
                 </tbody>
               </table>
+              <PrimaryButton className={`float-right`}>
+                Add More Items
+              </PrimaryButton>
             </div>
           </div>
         </div>
