@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import AsideLeft from "@/components/admin/dashboard/AsideLeft/AsideLeft";
 import H2 from "@/components/UI/H2";
 
-export default function AdminHomePage() {
+export default function ServicesSettingsPage() {
   const [token, settoken] = useState();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function AdminHomePage() {
         </div>
         <div className="col-span-6">
           <main className="p-10">
-            <H2>Category Management</H2>
+            <H2>Services Settings Page</H2>
           </main>
         </div>
       </div>

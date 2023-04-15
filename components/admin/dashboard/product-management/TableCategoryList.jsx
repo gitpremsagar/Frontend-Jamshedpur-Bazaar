@@ -3,6 +3,18 @@ import TableRow from "./TableRow";
 import PrimaryButton from "@/components/UI/PrimaryButton";
 
 export default function TableCategoryList({ categories }) {
+  function deleteClickHandler(categoryType, categoryID, categoryName) {
+    console.log(
+      "Delete Clicked! cat type = ",
+      categoryType,
+      " cat ID = ",
+      categoryID
+    );
+    const userAnswer = confirm(
+      `Are you sure you want to delete "${categoryName}" Category`
+    );
+    if (userAnswer) console.log("Deleting!");
+  }
   let colorChanger = false;
   return (
     <div>
@@ -37,6 +49,8 @@ export default function TableCategoryList({ categories }) {
                         index={key}
                         parentCatName={category.parent_top_category_name}
                         colorChanger={colorChanger}
+                        onDeleteClickHandler={deleteClickHandler}
+                        catType="category"
                       />
                     );
                   })}

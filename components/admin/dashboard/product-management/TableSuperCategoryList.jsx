@@ -3,7 +3,19 @@ import PrimaryButton from "@/components/UI/PrimaryButton";
 import TableRow from "./TableRow";
 
 export default function TableSuperCategoryList({ topCategories }) {
-  let colorChanger = false;
+  function deleteClickHandler(categoryType, categoryID, categoryName) {
+    console.log(
+      "Delete Clicked! cat type = ",
+      categoryType,
+      " cat ID = ",
+      categoryID
+    );
+    const userAnswer = confirm(
+      `Are you sure you want to delete "${categoryName}" Top-Category`
+    );
+    if (userAnswer) console.log("Deleting!");
+  }
+  let colorChanger = false; //this variable is used to give alternating colour to rows of table
   return (
     <div>
       <div className="flex flex-col border-2 my-10">
@@ -33,9 +45,11 @@ export default function TableSuperCategoryList({ topCategories }) {
                     return (
                       <TableRow
                         key={key}
-                        index={key}
+                        index={topCategory.top_category_id}
                         catName={topCategory.top_category_name}
                         colorChanger={colorChanger}
+                        onDeleteClickHandler={deleteClickHandler}
+                        catType="top-category"
                       />
                     );
                   })}

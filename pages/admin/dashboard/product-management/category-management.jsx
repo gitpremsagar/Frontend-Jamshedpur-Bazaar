@@ -12,7 +12,7 @@ import {
 } from "@/service/envVars";
 import axios from "axios";
 
-export default function AdminHomePage(props) {
+export default function CategoriesManagementPage(props) {
   const [token, settoken] = useState();
 
   const [topCategories, setTopCategories] = useState(props.topCategories);
