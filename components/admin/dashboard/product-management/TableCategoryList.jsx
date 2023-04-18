@@ -46,7 +46,8 @@ export default function TableCategoryList({ categories }) {
                       <TableRow
                         catName={category.category_name}
                         key={key}
-                        index={key}
+                        categoryID={category.category_id}
+                        arrayIndex={key}
                         parentCatName={category.parent_top_category_name}
                         colorChanger={colorChanger}
                         onDeleteClickHandler={deleteClickHandler}

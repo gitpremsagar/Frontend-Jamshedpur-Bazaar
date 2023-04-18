@@ -12,6 +12,7 @@ export default function TableRow({
   onEditClickHandler,
   catType,
 }) {
+  const serialNumber = parseInt(arrayIndex) + 1;
   function triggerDelete() {
     onDeleteClickHandler(catType, categoryID, catName, arrayIndex);
   }
@@ -27,7 +28,9 @@ export default function TableRow({
           : `border-b bg-gray-200 hover:bg-gray-700 hover:text-white`
       }
     >
-      <td className="whitespace-nowrap px-6 py-4 font-medium">{categoryID}</td>
+      <td className="whitespace-nowrap px-6 py-4 font-medium">
+        {serialNumber}
+      </td>
       <td className="whitespace-nowrap px-6 py-4">{catName}</td>
       <td className="whitespace-nowrap px-6 py-4">
         {parentCatName ? parentCatName : "---"}
