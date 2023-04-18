@@ -2,19 +2,47 @@ import React from "react";
 import PrimaryButton from "@/components/UI/PrimaryButton";
 import TableRow from "./TableRow";
 
-export default function TableSuperCategoryList({ topCategories }) {
-  function deleteClickHandler(categoryType, categoryID, categoryName) {
+export default function TableSuperCategoryList({
+  topCategories,
+  setTopCategories,
+}) {
+  function deleteClickHandler(
+    categoryType,
+    categoryID,
+    categoryName,
+    arrayIndex
+  ) {
     console.log(
       "Delete Clicked! cat type = ",
       categoryType,
       " cat ID = ",
       categoryID
     );
-    const userAnswer = confirm(
-      `Are you sure you want to delete "${categoryName}" Top-Category`
-    );
-    if (userAnswer) console.log("Deleting!");
+    // const userAnswer = confirm(
+    //   `Are you sure you want to delete "${categoryName}" Top-Category`
+    // );
+    // if (userAnswer) console.log("Deleting!");
+
+    // remove top category
+    setTopCategories((prev) => {
+      const newTopCtegories = [...prev];
+      const filteredCategory = newTopCtegories.filter((_, index) => {
+        return index !== arrayIndex;
+      });
+      return filteredCategory;
+    });
   }
+
+  function editClickHandler(categoryType, categoryID, categoryName) {
+    console.log(
+      "Editing Clicked! cat type = ",
+      categoryType,
+      " cat ID = ",
+      categoryID
+    );
+    //write logic to edit top-category
+  }
+
   let colorChanger = false; //this variable is used to give alternating colour to rows of table
   return (
     <div>
@@ -45,10 +73,12 @@ export default function TableSuperCategoryList({ topCategories }) {
                     return (
                       <TableRow
                         key={key}
-                        index={topCategory.top_category_id}
+                        categoryID={topCategory.top_category_id}
+                        arrayIndex={key}
                         catName={topCategory.top_category_name}
                         colorChanger={colorChanger}
                         onDeleteClickHandler={deleteClickHandler}
+                        onEditClickHandler={editClickHandler}
                         catType="top-category"
                       />
                     );

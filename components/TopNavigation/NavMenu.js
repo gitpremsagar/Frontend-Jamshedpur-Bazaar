@@ -1,7 +1,43 @@
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import React, { useState } from "react";
+import axios from "axios";
+import useSWR from "swr";
+// import {
+//   BACKEND_API_ENDPOINT_FOR_CATEGORIES,
+//   BACKEND_API_FOR_TOP_CATEGORIES,
+// } from "@/service/envVars";
 
 export default function NavMenu() {
+  // const [topCategories, setTopCategories] = useState(props.topCategories);
+  // const [categoriesOnDb, setCategories] = useState(props.categories);
+
+  // //fetcher for useSWR
+  // const fetcher = (url) => axios.get(url).then((res) => res.data);
+
+  // // fetching top-categories from db
+  // const {
+  //   data: dataTopCategories,
+  //   error: errorTopCategory,
+  //   isLoading: isLoadingTopCategories,
+  // } = useSWR(BACKEND_API_FOR_TOP_CATEGORIES, fetcher);
+
+  // // assigning top-categories response to the coresponding state
+  // // useEffect(() => {
+  // //   if (dataTopCategories) setTopCategories(dataTopCategories);
+  // // }, [dataTopCategories]);
+
+  // // fetching categories from db
+  // const {
+  //   data: dataCategories,
+  //   error: errorCategories,
+  //   isLoading: isLoadingCategories,
+  // } = useSWR(BACKEND_API_ENDPOINT_FOR_CATEGORIES, fetcher);
+
+  // // assigning categories response to respective state
+  // // useEffect(() => {
+  // //   if (dataCategories) setCategories(dataCategories);
+  // // }, [dataCategories]);
+
   const categories = [
     {
       name: "Grocery",
@@ -193,8 +229,6 @@ export default function NavMenu() {
     // add more categories as needed
   ];
 
-  const [isCategoryHovered, setisCategoryHovered] = useState(false);
-
   return (
     <div>
       <nav className="text-white bg-blue-600">
@@ -248,3 +282,17 @@ export default function NavMenu() {
     </div>
   );
 }
+
+// export async function getStaticProps() {
+//   const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
+//   const topCategories = await responseTopCategories.json();
+
+//   const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
+//   const categories = await responseCategories.json();
+//   return {
+//     props: {
+//       topCategories,
+//       categories,
+//     },
+//   };
+// }

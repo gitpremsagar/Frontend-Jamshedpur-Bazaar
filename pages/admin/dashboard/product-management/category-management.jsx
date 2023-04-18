@@ -61,7 +61,10 @@ export default function CategoriesManagementPage(props) {
           <main className="p-10">
             <section>
               <H3>Top Category Details :</H3>
-              <TableSuperCategoryList topCategories={topCategories} />
+              <TableSuperCategoryList
+                topCategories={topCategories}
+                setTopCategories={setTopCategories}
+              />
             </section>
 
             <section>

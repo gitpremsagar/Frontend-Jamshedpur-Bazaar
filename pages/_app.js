@@ -1,15 +1,14 @@
 import Footer from "@/components/Footer/Footer";
-import CategoriesNavBar from "@/components/TopNavigation/CategoriesNavBar";
 import NavBar from "@/components/TopNavigation/NavBar";
-
 import "@/styles/globals.css";
 import { Fragment } from "react";
+import NavMenu from "@/components/TopNavigation/NavMenu";
 
 export default function App({ Component, pageProps }) {
   return (
     <Fragment>
       <NavBar />
-      <CategoriesNavBar />
+      <NavMenu />
       <Component {...pageProps} />
       <Footer />
     </Fragment>
