@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import AsideLeft from "@/components/admin/dashboard/AsideLeft/AsideLeft";
 import H3 from "@/components/UI/H3";
-
-import TableCategoryList from "@/components/admin/dashboard/product-management/TableCategoryList";
+import TableSuperCategoryList from "@/components/admin/dashboard/product-management/TableSuperCategoryList";
 import useSWR from "swr";
 import {
   BACKEND_API_ENDPOINT_FOR_CATEGORIES,
@@ -12,29 +11,29 @@ import {
 import axios from "axios";
 
 export default function CategoriesManagementPage(props) {
-  // accessing jwt
   const [token, settoken] = useState();
+  // accessing jwt
   useEffect(() => {
     const jwtToken = Cookies.get("token");
     settoken(jwtToken);
   }, []);
 
-  const [categories, setCategories] = useState(props.categories);
+  const [topCategories, setTopCategories] = useState(props.topCategories);
 
   //fetcher for useSWR
   const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-  // fetching categories from db
+  // fetching top-categories from db
   const {
-    data: dataCategories,
-    error: errorCategories,
-    isLoading: isLoadingCategories,
-  } = useSWR(BACKEND_API_ENDPOINT_FOR_CATEGORIES, fetcher);
+    data: dataTopCategories,
+    error: errorTopCategory,
+    isLoading: isLoadingTopCategories,
+  } = useSWR(BACKEND_API_FOR_TOP_CATEGORIES, fetcher);
 
-  // assigning categories response to respective state
+  // assigning top-categories response to the coresponding state
   useEffect(() => {
-    if (dataCategories) setCategories(dataCategories);
-  }, [dataCategories]);
+    if (dataTopCategories) setTopCategories(dataTopCategories);
+  }, [dataTopCategories]);
 
   return (
     <div className="min-h-screen">
@@ -45,8 +44,11 @@ export default function CategoriesManagementPage(props) {
         <div className="col-span-6">
           <main className="p-10">
             <section>
-              <H3>Category Details :</H3>
-              <TableCategoryList categories={categories} />
+              <H3>Top Category Details :</H3>
+              <TableSuperCategoryList
+                topCategories={topCategories}
+                setTopCategories={setTopCategories}
+              />
             </section>
           </main>
         </div>
@@ -56,11 +58,12 @@ export default function CategoriesManagementPage(props) {
 }
 
 export async function getStaticProps() {
-  const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-  const categories = await responseCategories.json();
+  const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
+  const topCategories = await responseTopCategories.json();
+
   return {
     props: {
-      categories,
+      topCategories,
     },
   };
 }

@@ -41,11 +41,26 @@ export default function AsideLeft() {
             <ul className="text-white">
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
-                  href={`/admin/dashboard/product-management/category-management`}
+                  href={`/admin/dashboard/product-management/top-categories-management`}
                 >
-                  Category Management
+                  Top Categories Management
                 </Link>
               </li>
+              <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
+                <Link
+                  href={`/admin/dashboard/product-management/category-management`}
+                >
+                  Categories Management
+                </Link>
+              </li>
+              <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
+                <Link
+                  href={`/admin/dashboard/product-management/sub-categories-management`}
+                >
+                  Sub-Categories Management
+                </Link>
+              </li>
+
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
                   href={`/admin/dashboard/product-management/add-new-product`}

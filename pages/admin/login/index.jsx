@@ -7,12 +7,6 @@ export default function AdminLoginPage() {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  // const setJWTCookie = (jwt) => {
-  //   // Set cookie valid for 1 day
-  //   const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day in milliseconds
-  //   Cookies.set("token", jwt, { expires, path: "/" });
-  // };
-
   const setJWTCookie = (jwt) => {
     Cookies.set("token", jwt, { path: "/", session: true });
   };
@@ -25,15 +19,11 @@ export default function AdminLoginPage() {
         password: passwordInputRef.current.value,
       });
 
-      // console.log("Response = ", response.data);
-      // console.log(
-      //   "Token sent from server = ",
-      //   response.headers["x-auth-token"]
-      // );
       setJWTCookie(response.headers["x-auth-token"]);
       //console.log(Cookies.get("token"));
       window.location.replace("/admin/dashboard");
     } catch (error) {
+      alert("Some error occured while logging in!");
       console.log(error);
     }
   }

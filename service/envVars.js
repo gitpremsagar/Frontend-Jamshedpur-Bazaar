@@ -7,3 +7,5 @@ export const BACKEND_API_FOR_ADMIN = `${BACKEND_HOSTNAME}/api/admin`;
 export const BACKEND_API_FOR_TOP_CATEGORIES = `${BACKEND_HOSTNAME}/api/top-categories`;
 
 export const BACKEND_API_ENDPOINT_FOR_CATEGORIES = `${BACKEND_HOSTNAME}/api/categories`;
+
+export const BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES = `${BACKEND_HOSTNAME}/api/sub-categories`;

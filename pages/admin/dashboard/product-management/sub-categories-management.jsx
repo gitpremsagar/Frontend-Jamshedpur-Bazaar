@@ -5,10 +5,7 @@ import H3 from "@/components/UI/H3";
 
 import TableCategoryList from "@/components/admin/dashboard/product-management/TableCategoryList";
 import useSWR from "swr";
-import {
-  BACKEND_API_ENDPOINT_FOR_CATEGORIES,
-  BACKEND_API_FOR_TOP_CATEGORIES,
-} from "@/service/envVars";
+import { BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES } from "@/service/envVars";
 import axios from "axios";
 
 export default function CategoriesManagementPage(props) {
@@ -19,22 +16,22 @@ export default function CategoriesManagementPage(props) {
     settoken(jwtToken);
   }, []);
 
-  const [categories, setCategories] = useState(props.categories);
+  const [subCategories, setsubCategories] = useState(props.subCategories);
 
   //fetcher for useSWR
   const fetcher = (url) => axios.get(url).then((res) => res.data);
 
   // fetching categories from db
   const {
-    data: dataCategories,
-    error: errorCategories,
-    isLoading: isLoadingCategories,
-  } = useSWR(BACKEND_API_ENDPOINT_FOR_CATEGORIES, fetcher);
+    data: dataSubCategories,
+    error: errorSubCategories,
+    isLoading: isLoadingSubCategories,
+  } = useSWR(BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES, fetcher);
 
   // assigning categories response to respective state
   useEffect(() => {
-    if (dataCategories) setCategories(dataCategories);
-  }, [dataCategories]);
+    if (dataSubCategories) setsubCategories(dataSubCategories);
+  }, [dataSubCategories]);
 
   return (
     <div className="min-h-screen">
@@ -46,7 +43,7 @@ export default function CategoriesManagementPage(props) {
           <main className="p-10">
             <section>
               <H3>Category Details :</H3>
-              <TableCategoryList categories={categories} />
+              <TableCategoryList categories={subCategories} />
             </section>
           </main>
         </div>
@@ -56,11 +53,25 @@ export default function CategoriesManagementPage(props) {
 }
 
 export async function getStaticProps() {
-  const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-  const categories = await responseCategories.json();
-  return {
-    props: {
-      categories,
-    },
-  };
+  try {
+    const responsesubCategories = await fetch(
+      BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
+    );
+    const subCategories = await responsesubCategories.json();
+    return {
+      props: {
+        subCategories,
+      },
+    };
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: sub-categories-management.jsx:67 ~ getStaticProps ~ error:",
+      error
+    );
+    return {
+      props: {
+        subCategories: [],
+      },
+    };
+  }
 }
