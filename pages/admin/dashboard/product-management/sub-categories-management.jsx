@@ -24,7 +24,7 @@ export default function CategoriesManagementPage(props) {
   //fetcher for useSWR
   const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-  // fetching categories from db
+  // fetching sub-categories from db
   const {
     data: dataSubCategories,
     error: errorSubCategories,
@@ -36,6 +36,18 @@ export default function CategoriesManagementPage(props) {
     if (dataSubCategories) setsubCategories(dataSubCategories);
   }, [dataSubCategories]);
 
+  // fetching categories from db
+  const {
+    data: dataCategories,
+    error: errorCategories,
+    isLoading: isLoadingCategories,
+  } = useSWR(BACKEND_API_ENDPOINT_FOR_CATEGORIES, fetcher);
+
+  // assigning categories response to respective state
+  useEffect(() => {
+    if (dataCategories) setCategories(dataCategories);
+  }, [dataCategories]);
+
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-8">
@@ -45,7 +57,7 @@ export default function CategoriesManagementPage(props) {
         <div className="col-span-6">
           <main className="p-10">
             <section>
-              <H3>Category Details :</H3>
+              <H3>Sub-Category Details :</H3>
               <TableSubCategoryList
                 subCategories={subCategories}
                 setsubCategories={setsubCategories}

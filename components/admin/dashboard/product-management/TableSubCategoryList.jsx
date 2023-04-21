@@ -69,6 +69,10 @@ export default function TableSubCategoryList({
     }
   }
 
+  async function handleEditSubCategory() {
+    console.log("Edit sub category clicked!");
+  }
+
   let colorChanger = false; //this variable is responsible for changing colour of every alternating row of the table
   return (
     <div>
@@ -105,6 +109,7 @@ export default function TableSubCategoryList({
                         parentCatName={subCategory.parent_category_name}
                         colorChanger={colorChanger}
                         onDeleteClickHandler={handleDeleteSubCategory}
+                        onEditClickHandler={handleEditSubCategory}
                         catType="sub-category"
                       />
                     );

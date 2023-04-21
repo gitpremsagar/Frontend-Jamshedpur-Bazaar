@@ -37,6 +37,18 @@ export default function CategoriesManagementPage(props) {
     if (dataCategories) setCategories(dataCategories);
   }, [dataCategories]);
 
+  // fetching top-categories from db
+  const {
+    data: dataTopCategories,
+    error: errorTopCategory,
+    isLoading: isLoadingTopCategories,
+  } = useSWR(BACKEND_API_FOR_TOP_CATEGORIES, fetcher);
+
+  // assigning top-categories response to the coresponding state
+  useEffect(() => {
+    if (dataTopCategories) setTopCategories(dataTopCategories);
+  }, [dataTopCategories]);
+
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-8">

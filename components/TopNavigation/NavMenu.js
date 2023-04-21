@@ -2,43 +2,56 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import useSWR from "swr";
-// import {
-//   BACKEND_API_ENDPOINT_FOR_CATEGORIES,
-//   BACKEND_API_FOR_TOP_CATEGORIES,
-// } from "@/service/envVars";
+import {
+  BACKEND_API_ENDPOINT_FOR_CATEGORIES,
+  BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES,
+  BACKEND_API_FOR_TOP_CATEGORIES,
+} from "@/service/envVars";
 
-export default function NavMenu() {
-  // const [topCategories, setTopCategories] = useState(props.topCategories);
-  // const [categoriesOnDb, setCategories] = useState(props.categories);
+export default function NavMenu(props) {
+  const [topCategories, setTopCategories] = useState(props.topCategories);
+  const [categories, setCategories] = useState(props.categories);
+  const [subCategories, setSubCategories] = useState(props.subCategories);
 
-  // //fetcher for useSWR
-  // const fetcher = (url) => axios.get(url).then((res) => res.data);
+  //fetcher for useSWR
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-  // // fetching top-categories from db
-  // const {
-  //   data: dataTopCategories,
-  //   error: errorTopCategory,
-  //   isLoading: isLoadingTopCategories,
-  // } = useSWR(BACKEND_API_FOR_TOP_CATEGORIES, fetcher);
+  // fetching top-categories from db
+  const {
+    data: dataTopCategories,
+    error: errorTopCategory,
+    isLoading: isLoadingTopCategories,
+  } = useSWR(BACKEND_API_FOR_TOP_CATEGORIES, fetcher);
 
-  // // assigning top-categories response to the coresponding state
-  // // useEffect(() => {
-  // //   if (dataTopCategories) setTopCategories(dataTopCategories);
-  // // }, [dataTopCategories]);
+  // assigning top-categories response to the coresponding state
+  useEffect(() => {
+    if (dataTopCategories) setTopCategories(dataTopCategories);
+  }, [dataTopCategories]);
 
-  // // fetching categories from db
-  // const {
-  //   data: dataCategories,
-  //   error: errorCategories,
-  //   isLoading: isLoadingCategories,
-  // } = useSWR(BACKEND_API_ENDPOINT_FOR_CATEGORIES, fetcher);
+  // fetching categories from db
+  const {
+    data: dataCategories,
+    error: errorCategories,
+    isLoading: isLoadingCategories,
+  } = useSWR(BACKEND_API_ENDPOINT_FOR_CATEGORIES, fetcher);
 
-  // // assigning categories response to respective state
-  // // useEffect(() => {
-  // //   if (dataCategories) setCategories(dataCategories);
-  // // }, [dataCategories]);
+  // assigning categories response to respective state
+  useEffect(() => {
+    if (dataCategories) setCategories(dataCategories);
+  }, [dataCategories]);
 
-  const categories = [
+  // fetching sub-categories
+  const {
+    data: dataSubCategories,
+    error: errorSubCategories,
+    isLoading: isLoadingSubCategories,
+  } = useSWR(BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES, fetcher);
+  // assigning sub-category response to coresponding local state hook
+  useEffect(() => {
+    if (dataSubCategories) setSubCategories(dataSubCategories);
+  }, [dataSubCategories]);
+
+  const oldCategories = [
     {
       name: "Grocery",
       subcategories: [
@@ -229,11 +242,15 @@ export default function NavMenu() {
     // add more categories as needed
   ];
 
+  // categories navigation array
+  const [categriesNavigationArray, setCategriesNavigationArray] =
+    useState(oldCategories);
+
   return (
     <div>
       <nav className="text-white bg-blue-600">
         <ul className="main_menu ">
-          {categories.map((category, key) => {
+          {categriesNavigationArray.map((category, key) => {
             return (
               <li
                 key={key}
@@ -283,16 +300,38 @@ export default function NavMenu() {
   );
 }
 
-// export async function getStaticProps() {
-//   const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
-//   const topCategories = await responseTopCategories.json();
+// server-side data fetching
+export async function getStaticProps() {
+  try {
+    const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
+    const topCategories = responseTopCategories.json();
 
-//   const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-//   const categories = await responseCategories.json();
-//   return {
-//     props: {
-//       topCategories,
-//       categories,
-//     },
-//   };
-// }
+    const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
+    const categories = await responseCategories.json();
+
+    const responsesubCategories = await fetch(
+      BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
+    );
+    const subCategories = await responsesubCategories.json();
+
+    return {
+      props: {
+        topCategories,
+        categories,
+        subCategories,
+      },
+    };
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: sub-categories-management.jsx:67 ~ getStaticProps ~ error:",
+      error
+    );
+    return {
+      props: {
+        topCategories: [],
+        categories: [],
+        subCategories: [],
+      },
+    };
+  }
+}

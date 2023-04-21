@@ -3,7 +3,7 @@ import React from "react";
 
 export default function AsideLeft() {
   return (
-    <div>
+    <div className="">
       <nav className="text-yellow-300">
         <ul>
           <li className="px-3 py-2 hover:bg-gray-800 rounded">
@@ -36,30 +36,35 @@ export default function AsideLeft() {
           </li>
 
           <li className="px-3 py-2">
-            Product Management :
+            Categories Management :
             <ul className="text-white">
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
                   href={`/admin/dashboard/product-management/top-categories-management`}
                 >
-                  Top Categories Management
+                  Top Categories
                 </Link>
               </li>
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
                   href={`/admin/dashboard/product-management/categories-management`}
                 >
-                  Categories Management
+                  Categories
                 </Link>
               </li>
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
                   href={`/admin/dashboard/product-management/sub-categories-management`}
                 >
-                  Sub-Categories Management
+                  Sub-Categories
                 </Link>
               </li>
+            </ul>
+          </li>
 
+          <li className="px-3 py-2">
+            Product Management :
+            <ul className="text-white">
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
                   href={`/admin/dashboard/product-management/add-new-product`}
