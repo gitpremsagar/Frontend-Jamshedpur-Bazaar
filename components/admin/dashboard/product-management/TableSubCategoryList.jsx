@@ -3,8 +3,14 @@ import TableRow from "./TableRow";
 import InputElement from "@/components/UI/InputElement";
 import SelectElement from "@/components/UI/SelectElement";
 import PrimaryButton from "@/components/UI/PrimaryButton";
+import axios from "axios";
+import { BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES } from "@/service/envVars";
 
-export default function TableSubCategoryList({ categories, subCategories }) {
+export default function TableSubCategoryList({
+  categories,
+  subCategories,
+  setsubCategories,
+}) {
   // calculate sub-categories array length
   const [subCategoriesArrayLength, setSubCategoriesArrayLength] = useState(0);
   useEffect(() => {
@@ -15,7 +21,52 @@ export default function TableSubCategoryList({ categories, subCategories }) {
   const parentCategoriesSelectRef = useRef();
 
   async function handleAddNewSubCategory() {
-    console.log("Adding new sub category");
+    try {
+      const response = await axios.post(
+        BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES,
+        {
+          newSubCategory: subCategoryInputRef.current.value,
+          parentCategoryID: parentCategoriesSelectRef.current.value,
+        }
+      );
+      console.log(response);
+      if (response.data.created) {
+        setsubCategories((prev) => {
+          return [...prev, response.data.insertedRow];
+        });
+      }
+    } catch (error) {
+      alert("Some error occured while adding new sub category");
+      console.log(error);
+    }
+  }
+
+  async function handleDeleteSubCategory(
+    categoryType,
+    subCategoryID,
+    subCategoryName,
+    arrayIndex
+  ) {
+    const userAnswer = confirm(
+      `Do you really want to delete "${subCategoryName}" Sub-Category?`
+    );
+    // procced to delete if the sub category in the user confirms
+    if (userAnswer) {
+      try {
+        const response = await axios.delete(
+          BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES + `/${subCategoryID}`
+        );
+        // delete the subcategory from local state hook if successfully deleted from database
+        if (response.data.deleted) {
+          setsubCategories((prev) => {
+            return prev.filter((_, index) => index !== arrayIndex);
+          });
+        }
+      } catch (error) {
+        alert("Some kind of error occered while deleting the sub-category");
+        console.log(error);
+      }
+    }
   }
 
   let colorChanger = false; //this variable is responsible for changing colour of every alternating row of the table
@@ -53,9 +104,7 @@ export default function TableSubCategoryList({ categories, subCategories }) {
                         arrayIndex={key}
                         parentCatName={subCategory.parent_category_name}
                         colorChanger={colorChanger}
-                        onDeleteClickHandler={() => {
-                          console.log("delete clicked");
-                        }}
+                        onDeleteClickHandler={handleDeleteSubCategory}
                         catType="sub-category"
                       />
                     );

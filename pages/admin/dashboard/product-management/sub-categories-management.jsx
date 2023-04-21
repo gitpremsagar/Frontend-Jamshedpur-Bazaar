@@ -31,7 +31,7 @@ export default function CategoriesManagementPage(props) {
     isLoading: isLoadingSubCategories,
   } = useSWR(BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES, fetcher);
 
-  // assigning categories response to respective state
+  // assigning sub-categories response to respective state
   useEffect(() => {
     if (dataSubCategories) setsubCategories(dataSubCategories);
   }, [dataSubCategories]);
@@ -48,6 +48,7 @@ export default function CategoriesManagementPage(props) {
               <H3>Category Details :</H3>
               <TableSubCategoryList
                 subCategories={subCategories}
+                setsubCategories={setsubCategories}
                 categories={categories}
               />
             </section>
