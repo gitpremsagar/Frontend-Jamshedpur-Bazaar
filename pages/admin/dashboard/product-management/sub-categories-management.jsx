@@ -7,6 +7,7 @@ import TableCategoryList from "@/components/admin/dashboard/product-management/T
 import useSWR from "swr";
 import { BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES } from "@/service/envVars";
 import axios from "axios";
+import TableSubCategoryList from "@/components/admin/dashboard/product-management/TableSubCategoryList";
 
 export default function CategoriesManagementPage(props) {
   // accessing jwt
@@ -43,7 +44,7 @@ export default function CategoriesManagementPage(props) {
           <main className="p-10">
             <section>
               <H3>Category Details :</H3>
-              <TableCategoryList categories={subCategories} />
+              <TableSubCategoryList categories={subCategories} />
             </section>
           </main>
         </div>
@@ -52,6 +53,7 @@ export default function CategoriesManagementPage(props) {
   );
 }
 
+// server-side data fetching
 export async function getStaticProps() {
   try {
     const responsesubCategories = await fetch(

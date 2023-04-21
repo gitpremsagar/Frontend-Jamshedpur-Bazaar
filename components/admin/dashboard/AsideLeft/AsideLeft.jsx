@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export default function AsideLeft() {
   return (
@@ -48,7 +47,7 @@ export default function AsideLeft() {
               </li>
               <li className="px-3 py-2 hover:bg-gray-800 rounded-lg">
                 <Link
-                  href={`/admin/dashboard/product-management/category-management`}
+                  href={`/admin/dashboard/product-management/categories-management`}
                 >
                   Categories Management
                 </Link>

@@ -4,13 +4,10 @@ import AsideLeft from "@/components/admin/dashboard/AsideLeft/AsideLeft";
 import H3 from "@/components/UI/H3";
 import TableSuperCategoryList from "@/components/admin/dashboard/product-management/TableSuperCategoryList";
 import useSWR from "swr";
-import {
-  BACKEND_API_ENDPOINT_FOR_CATEGORIES,
-  BACKEND_API_FOR_TOP_CATEGORIES,
-} from "@/service/envVars";
+import { BACKEND_API_FOR_TOP_CATEGORIES } from "@/service/envVars";
 import axios from "axios";
 
-export default function CategoriesManagementPage(props) {
+export default function TopCategoriesManagementPage(props) {
   const [token, settoken] = useState();
   // accessing jwt
   useEffect(() => {
