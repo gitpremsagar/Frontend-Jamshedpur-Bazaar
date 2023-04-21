@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import AsideLeft from "@/components/admin/dashboard/AsideLeft/AsideLeft";
 import H3 from "@/components/UI/H3";
-
-import TableCategoryList from "@/components/admin/dashboard/product-management/TableCategoryList";
 import useSWR from "swr";
-import { BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES } from "@/service/envVars";
+import {
+  BACKEND_API_ENDPOINT_FOR_CATEGORIES,
+  BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES,
+} from "@/service/envVars";
 import axios from "axios";
 import TableSubCategoryList from "@/components/admin/dashboard/product-management/TableSubCategoryList";
 
@@ -18,6 +19,7 @@ export default function CategoriesManagementPage(props) {
   }, []);
 
   const [subCategories, setsubCategories] = useState(props.subCategories);
+  const [categories, setCategories] = useState(props.categories);
 
   //fetcher for useSWR
   const fetcher = (url) => axios.get(url).then((res) => res.data);
@@ -44,7 +46,10 @@ export default function CategoriesManagementPage(props) {
           <main className="p-10">
             <section>
               <H3>Category Details :</H3>
-              <TableSubCategoryList categories={subCategories} />
+              <TableSubCategoryList
+                subCategories={subCategories}
+                categories={categories}
+              />
             </section>
           </main>
         </div>
@@ -60,9 +65,14 @@ export async function getStaticProps() {
       BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
     );
     const subCategories = await responsesubCategories.json();
+
+    const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
+    const categories = await responseCategories.json();
+
     return {
       props: {
         subCategories,
+        categories,
       },
     };
   } catch (error) {
@@ -73,6 +83,7 @@ export async function getStaticProps() {
     return {
       props: {
         subCategories: [],
+        categories: [],
       },
     };
   }
