@@ -66,36 +66,46 @@ export default function NavMenuCopy(props) {
                   className="block"
                 >
                   {topCategory.top_category_name}
-                  <ul className="sub_menu">
-                    {categories.map((category) => {
-                      if (
-                        category.parent_top_category_name ==
-                        topCategory.top_category_name
-                      ) {
-                        return (
-                          <li className="px-3 py-2 bg-gray-600">
-                            {category.category_name}
-
-                            <ul className="bg-blue-600 super_submenu">
-                              {subCategories.map((subCategory) => {
-                                if (
-                                  subCategory.parent_category_name ==
-                                  category.category_name
-                                ) {
-                                  return (
-                                    <li className="px-3 py-2">
-                                      {subCategory.sub_category_name}
-                                    </li>
-                                  );
-                                }
-                              })}
-                            </ul>
-                          </li>
-                        );
-                      }
-                    })}
-                  </ul>
                 </Link>
+                <ul className="sub_menu">
+                  {categories.map((category) => {
+                    if (
+                      category.parent_top_category_name ==
+                      topCategory.top_category_name
+                    ) {
+                      return (
+                        <li className="px-3 py-2 bg-gray-600">
+                          <Link
+                            href={`/products/${topCategory.top_category_name}/${category.category_name}`}
+                            className="block"
+                          >
+                            {category.category_name}
+                          </Link>
+
+                          <ul className="bg-blue-600 super_submenu">
+                            {subCategories.map((subCategory) => {
+                              if (
+                                subCategory.parent_category_name ==
+                                category.category_name
+                              ) {
+                                return (
+                                  <li className="px-3 py-2">
+                                    <Link
+                                      href={`/products/${topCategory.top_category_name}/${category.category_name}/${subCategory.sub_category_name}`}
+                                      className="block"
+                                    >
+                                      {subCategory.sub_category_name}
+                                    </Link>
+                                  </li>
+                                );
+                              }
+                            })}
+                          </ul>
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
               </li>
             );
           })}
