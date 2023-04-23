@@ -81,8 +81,8 @@ const CartPage = () => {
         <div className="md:col-span-6">
           {/*Shopping Cart Items List*/}
           <section>
-            {cartItems.map((product) => {
-              return <ProductCardHorizontal product={product} />;
+            {cartItems.map((product, key) => {
+              return <ProductCardHorizontal key={key} product={product} />;
             })}
           </section>
 
@@ -93,7 +93,10 @@ const CartPage = () => {
         {/*buy Now Card*/}
         <div className="md:col-span-2">
           <div className="min-h-[300px] min-w-full bg-blue-100 rounded-lg px-5 py-5">
-            <h6><span className="font-semibold">Delivery Detail: </span>Get it by Tomorrow</h6>
+            <h6>
+              <span className="font-semibold">Delivery Detail: </span>Get it by
+              Tomorrow
+            </h6>
             <div className="min-h-[200px]"></div>
             <button className="bg-yellow-300 hover:bg-yellow-400 rounded-lg px-3 py-2 border-2 border-white w-full font-semibold">
               Proceed to Buy

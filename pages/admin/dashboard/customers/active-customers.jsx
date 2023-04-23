@@ -19,7 +19,7 @@ export default function AdminHomePage() {
         </div>
         <div className="col-span-6">
           <main className="p-10">
-            <H2>Active Customer's Page</H2>
+            <H2>{`Active Customer's Page`}</H2>
           </main>
         </div>
       </div>

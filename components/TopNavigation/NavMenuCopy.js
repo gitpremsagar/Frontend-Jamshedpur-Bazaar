@@ -9,8 +9,10 @@ import {
 } from "@/service/envVars";
 
 export default function NavMenuCopy(props) {
-  const [topCategories, setTopCategories] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // console.log("props = ", props);
+
+  const [topCategories, setTopCategories] = useState(props.topCategories);
+  const [categories, setCategories] = useState(props.categories);
   const [subCategories, setSubCategories] = useState(props.subCategories);
 
   //fetcher for useSWR
@@ -25,7 +27,7 @@ export default function NavMenuCopy(props) {
 
   // assigning top-categories response to the coresponding state
   useEffect(() => {
-    if (dataTopCategories) setTopCategories(dataTopCategories);
+    // if (dataTopCategories) setTopCategories(dataTopCategories);
   }, [dataTopCategories]);
 
   // fetching categories from db
@@ -37,7 +39,7 @@ export default function NavMenuCopy(props) {
 
   // assigning categories response to respective state
   useEffect(() => {
-    if (dataCategories) setCategories(dataCategories);
+    // if (dataCategories) setCategories(dataCategories);
   }, [dataCategories]);
 
   // fetching sub-categories
@@ -48,7 +50,7 @@ export default function NavMenuCopy(props) {
   } = useSWR(BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES, fetcher);
   // assigning sub-category response to coresponding local state hook
   useEffect(() => {
-    if (dataSubCategories) setSubCategories(dataSubCategories);
+    // if (dataSubCategories) setSubCategories(dataSubCategories);
   }, [dataSubCategories]);
 
   return (
@@ -68,13 +70,13 @@ export default function NavMenuCopy(props) {
                   {topCategory.top_category_name}
                 </Link>
                 <ul className="sub_menu">
-                  {categories.map((category) => {
+                  {categories.map((category, key) => {
                     if (
                       category.parent_top_category_name ==
                       topCategory.top_category_name
                     ) {
                       return (
-                        <li className="px-3 py-2 bg-gray-600">
+                        <li className="px-3 py-2 bg-gray-600" key={key}>
                           <Link
                             href={`/products/${topCategory.top_category_name}/${category.category_name}`}
                             className="block"
@@ -83,13 +85,13 @@ export default function NavMenuCopy(props) {
                           </Link>
 
                           <ul className="bg-blue-600 super_submenu">
-                            {subCategories.map((subCategory) => {
+                            {subCategories.map((subCategory, key) => {
                               if (
                                 subCategory.parent_category_name ==
                                 category.category_name
                               ) {
                                 return (
-                                  <li className="px-3 py-2">
+                                  <li className="px-3 py-2" key={key}>
                                     <Link
                                       href={`/products/${topCategory.top_category_name}/${category.category_name}/${subCategory.sub_category_name}`}
                                       className="block"
@@ -113,40 +115,4 @@ export default function NavMenuCopy(props) {
       </nav>
     </div>
   );
-}
-
-// server-side data fetching
-export async function getStaticProps() {
-  try {
-    const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
-    const topCategories = responseTopCategories.json();
-
-    const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-    const categories = await responseCategories.json();
-
-    const responsesubCategories = await fetch(
-      BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
-    );
-    const subCategories = await responsesubCategories.json();
-
-    return {
-      props: {
-        topCategories,
-        categories,
-        subCategories,
-      },
-    };
-  } catch (error) {
-    console.log(
-      "🚀 ~ file: sub-categories-management.jsx:67 ~ getStaticProps ~ error:",
-      error
-    );
-    return {
-      props: {
-        topCategories: [],
-        categories: [],
-        subCategories: [],
-      },
-    };
-  }
 }
