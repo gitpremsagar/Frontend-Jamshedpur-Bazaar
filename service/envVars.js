@@ -9,3 +9,5 @@ export const BACKEND_API_FOR_TOP_CATEGORIES = `${BACKEND_HOSTNAME}/api/top-categ
 export const BACKEND_API_ENDPOINT_FOR_CATEGORIES = `${BACKEND_HOSTNAME}/api/categories`;
 
 export const BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES = `${BACKEND_HOSTNAME}/api/sub-categories`;
+
+export const ISR_REVALIDATE_GAP_DURATION = 10;

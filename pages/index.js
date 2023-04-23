@@ -1,4 +1,6 @@
-import NavMenuCopy from "@/components/TopNavigation/NavMenuCopy";
+import NavMenuCopy, {
+  getStaticPropsForNavMenu,
+} from "@/components/TopNavigation/NavMenuCopy";
 import ProductCard from "@/components/cards/ProductCard";
 import {
   BACKEND_API_ENDPOINT_FOR_CATEGORIES,
@@ -67,33 +69,5 @@ export default function Home(props) {
 
 // server-side data fetching
 export async function getStaticProps() {
-  try {
-    const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
-    const topCategories = await responseTopCategories.json();
-
-    const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-    const categories = await responseCategories.json();
-
-    const responsesubCategories = await fetch(
-      BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
-    );
-    const subCategories = await responsesubCategories.json();
-
-    return {
-      props: {
-        topCategories,
-        categories,
-        subCategories,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        topCategories: [],
-        categories: [],
-        subCategories: [],
-      },
-    };
-  }
+  return await getStaticPropsForNavMenu();
 }

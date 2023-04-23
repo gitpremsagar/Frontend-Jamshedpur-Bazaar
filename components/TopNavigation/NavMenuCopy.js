@@ -6,6 +6,7 @@ import {
   BACKEND_API_ENDPOINT_FOR_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES,
   BACKEND_API_FOR_TOP_CATEGORIES,
+  ISR_REVALIDATE_GAP_DURATION,
 } from "@/service/envVars";
 
 export default function NavMenuCopy(props) {
@@ -115,4 +116,39 @@ export default function NavMenuCopy(props) {
       </nav>
     </div>
   );
+}
+
+export async function getStaticPropsForNavMenu() {
+  try {
+    console.log("getStaticPropsForNavMenu called");
+    const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
+    const topCategories = await responseTopCategories.json();
+
+    const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
+    const categories = await responseCategories.json();
+
+    const responsesubCategories = await fetch(
+      BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
+    );
+    const subCategories = await responsesubCategories.json();
+
+    return {
+      props: {
+        topCategories,
+        categories,
+        subCategories,
+      },
+      revalidate: ISR_REVALIDATE_GAP_DURATION,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        topCategories: [],
+        categories: [],
+        subCategories: [],
+      },
+      revalidate: ISR_REVALIDATE_GAP_DURATION,
+    };
+  }
 }
