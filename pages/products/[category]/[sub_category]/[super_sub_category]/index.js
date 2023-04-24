@@ -5,7 +5,6 @@ import ProductCard from "@/components/cards/ProductCard";
 import {
   BACKEND_API_ENDPOINT_FOR_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES,
-  BACKEND_API_FOR_TOP_CATEGORIES,
 } from "@/service/envVars";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
