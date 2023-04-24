@@ -120,7 +120,7 @@ export default function NavMenuCopy(props) {
 
 export async function getStaticPropsForNavMenu() {
   try {
-    console.log("getStaticPropsForNavMenu called");
+    // console.log("getStaticPropsForNavMenu called");
     const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
     const topCategories = await responseTopCategories.json();
 

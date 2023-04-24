@@ -8,7 +8,9 @@ import {
   BACKEND_API_FOR_TOP_CATEGORIES,
 } from "@/service/envVars";
 import { Fragment } from "react";
-import NavMenuCopy from "@/components/TopNavigation/NavMenuCopy";
+import NavMenuCopy, {
+  getStaticPropsForNavMenu,
+} from "@/components/TopNavigation/NavMenuCopy";
 
 export default function SpecificCategoryProductPage(props) {
   const router = useRouter();
@@ -38,50 +40,18 @@ export default function SpecificCategoryProductPage(props) {
 
 // server-side data fetching
 export async function getStaticProps(context) {
-  const params = context.params;
-  const requestedCategory = params.category;
-  // console.log("requested category = ", requestedCategory);
-  // console.log("preparing static props");
-  try {
-    const responseTopCategories = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
-    const topCategories = await responseTopCategories.json();
-
-    const responseCategories = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-    const categories = await responseCategories.json();
-
-    const responsesubCategories = await fetch(
-      BACKEND_API_ENDPOINT_FOR_SUB_CATEGORIES
-    );
-    const subCategories = await responsesubCategories.json();
-
-    return {
-      props: {
-        topCategories,
-        categories,
-        subCategories,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        topCategories: [],
-        categories: [],
-        subCategories: [],
-      },
-    };
-  }
+  return await getStaticPropsForNavMenu();
 }
 
 export async function getStaticPaths() {
-  const response = await fetch(BACKEND_API_ENDPOINT_FOR_CATEGORIES);
-  const categories = await response.json();
-  // console.log("categories on getStaticPaths = ", categories);
+  const response = await fetch(BACKEND_API_FOR_TOP_CATEGORIES);
+  const topCategories = await response.json();
+  // console.log("topCategories on getStaticPaths = ", topCategories);
 
-  const params = categories.map((category) => {
+  const params = topCategories.map((topCategory) => {
     return {
       params: {
-        category: category.category_name,
+        category: topCategory.top_category_name,
       },
     };
   });
@@ -89,6 +59,7 @@ export async function getStaticPaths() {
   // console.log("params = ", params);
   return {
     paths: params,
+    // paths: [],
     fallback: "blocking",
   };
 }
