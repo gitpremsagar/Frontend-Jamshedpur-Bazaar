@@ -7,6 +7,8 @@ import LableElement from "@/components/UI/LableElement";
 import FormElementContainer from "@/components/UI/FormElementContainer";
 import TextareaElement from "@/components/UI/TextareaElement";
 import CategoriesSelector from "@/components/admin/dashboard/product-management/CategoriesSelector";
+import SelectElement from "@/components/UI/SelectElement";
+import Section from "@/components/UI/Section";
 
 export default function AddNewProductPage() {
   const [token, settoken] = useState();
@@ -23,10 +25,12 @@ export default function AddNewProductPage() {
           <AsideLeft />
         </div>
         <div className="md:col-span-6">
-          <main className="p-10">
-            <H2>Add New Product</H2>
-            <div className="">
+          <main>
+            <Section>
+              <H2>Add New Product</H2>
+
               <form className="py-10">
+                {/* Product Name */}
                 <FormElementContainer>
                   <LableElement lableFor="productName">
                     Product Name
@@ -36,9 +40,11 @@ export default function AddNewProductPage() {
                     name="productName"
                     id="productName"
                     placeholder="Product Name"
+                    className={`w-full`}
                   />
                 </FormElementContainer>
 
+                {/* Product Description */}
                 <FormElementContainer>
                   <LableElement lableFor="productDescription">
                     Product Description
@@ -47,12 +53,81 @@ export default function AddNewProductPage() {
                     name="productDescription"
                     id="productDescription"
                     placeholder="Product Description"
+                    className={`w-full`}
                   />
                 </FormElementContainer>
 
+                {/* Product Price */}
+                <FormElementContainer>
+                  <LableElement lableFor="productPrice">
+                    Product Price
+                  </LableElement>
+                  <InputElement
+                    type="number"
+                    name="productPrice"
+                    id="productPrice"
+                    placeholder="Product Price"
+                    className={`w-full`}
+                  />
+                </FormElementContainer>
+
+                {/* Product Measurment */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-5">
+                  <FormElementContainer>
+                    <LableElement lableFor="productMeasurment">
+                      Product Measurment
+                    </LableElement>
+                    <InputElement
+                      name="productMeasurment"
+                      id="productMeasurment"
+                      placeholder="Product Description"
+                      className={`w-full`}
+                    />
+                  </FormElementContainer>
+                  <FormElementContainer>
+                    <LableElement lableFor="productMeasurment">
+                      Measuring Unit
+                    </LableElement>
+                    <InputElement
+                      name="productMeasurment"
+                      id="productMeasurment"
+                      placeholder="Product Description"
+                      className={`w-full`}
+                    />
+                  </FormElementContainer>
+                </div>
+
+                {/* Product Category */}
                 <CategoriesSelector />
+
+                {/* Product Quantity in Store */}
+                <FormElementContainer>
+                  <LableElement lableFor="productQuantityInInventory">
+                    Product Quantity in Inventory
+                  </LableElement>
+                  <InputElement
+                    name="productQuantityInInventory"
+                    id="productQuantityInInventory"
+                    placeholder="Product Description"
+                  />
+                </FormElementContainer>
+
+                {/* Handling instruction */}
+                <FormElementContainer>
+                  <LableElement lableFor="isProductBreakable">
+                    Is product breakable? (For handling instruction)
+                  </LableElement>
+                  <SelectElement
+                    name="isProductBreakable"
+                    id="isProductBreakable"
+                  >
+                    <option value="none">Select</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </SelectElement>
+                </FormElementContainer>
               </form>
-            </div>
+            </Section>
           </main>
         </div>
       </div>

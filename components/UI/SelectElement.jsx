@@ -18,7 +18,7 @@ export default function SelectElement({
       name={name}
       placeholder={placeholder}
       ref={selectRef}
-      className={`px-3 py-2 rounded-lg focus:outline-none border-2  focus:ring-[1px] focus:ring-blue-500 ${notAllowedCursor}`}
+      className={`px-3 py-2 w-full rounded-lg focus:outline-none border-2  focus:ring-[1px] focus:ring-blue-500 ${notAllowedCursor}`}
       onChange={onChangeHandler}
       disabled={disabledIndicator}
     >

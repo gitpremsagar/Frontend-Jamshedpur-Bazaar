@@ -85,11 +85,11 @@ export default function CategoriesSelector() {
   console.log(filteredSubCategories);
 
   return (
-    <div className="grid grid-cols-3">
+    <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-5">
       {/* Top-Category Selector */}
       <FormElementContainer>
         <LableElement lableFor={`topCategorySelector`}>
-          Select Top-Category For The Product
+          Top-Category
         </LableElement>
         <SelectElement
           id={`topCategorySelector`}
@@ -111,9 +111,7 @@ export default function CategoriesSelector() {
 
       {/* Category Selector */}
       <FormElementContainer>
-        <LableElement lableFor={`categorySelector`}>
-          Select Category For The Product
-        </LableElement>
+        <LableElement lableFor={`categorySelector`}>Category</LableElement>
         <SelectElement
           id={`categorySelector`}
           selectRef={categorySelectorRef}
@@ -132,7 +130,7 @@ export default function CategoriesSelector() {
       {/* Sub-Category Selector */}
       <FormElementContainer>
         <LableElement lableFor={`subCategorySelector`}>
-          Select Sub-Category For The Product
+          Sub-Category
         </LableElement>
         <SelectElement
           id={`subCategorySelector`}
